@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>Incapp Book App</h1>
+   <hr>
+   <h2>Search Book</h2>
+   <form action="SearchBook" method="post">
+       <label>Name:</label>
+       <input type="text" name="name" required />
+       <br><br>
+       <button>Submit</button>
+   </form>
+   <hr>
+   <h3>Add New Book:</h3>
+   <form action="AddBook" method="post" enctype="multipart/form-data">
+       <label>Name:</label>
+       <input type='text' name='name' required /> <br><br>
+       <label>Author Name:</label>
+       <input type='text' name='aname' required /> <br><br>
+       <label>Publisher Name:</label>
+       <input type='text' name='pname' required /> <br><br>
+       <label>Price:</label>
+       <input type='number' min='1' name='price' required /> <br><br>
+       <label>Cover Image:</label>
+       <input type='file' name='cImage' accept="image/*" /> <br><br>
+       <p style='color:red;'>Pdf Size Exceed! (Allowed less than 10MB)</p>
+       <label>Book Pdf:</label>
+       <input type='file' name='ctn' accept=".pdf" /> <br><br>
+       <button>Add</button>
+   </form>
+</body>
+</html>
