@@ -19,7 +19,7 @@ public class HbUtility {
         p.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
 		p.put(Environment.URL, "jdbc:mysql://localhost:3306/BookWebAppdb?createDatabaseIfNotExist=true");
 		p.put(Environment.USER, "root");
-		p.put(Environment.PASS, "ypur_DB_password");
+		p.put(Environment.PASS, "your_DB_password");
 		p.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 		p.put(Environment.HBM2DDL_AUTO, "update");
 		p.put(Environment.SHOW_SQL, "true");
@@ -31,3 +31,4 @@ public class HbUtility {
         sessionFactory = cfg.buildSessionFactory();
 	}
 }
+
