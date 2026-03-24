@@ -2,6 +2,7 @@ package com.tausif.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.annotation.WebServlet;
 
 /**
- * Servlet implementation class BookDetails
+ * Servlet implementation class SearchBook
  */
 @WebServlet("/BookDetails")
 public class BookDetails extends HttpServlet {
@@ -35,17 +36,16 @@ public class BookDetails extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession httpSession = request.getSession(false);
-		if(httpSession == null) {
+		HttpSession session=request.getSession(false);
+		if(session==null) {
 			response.sendRedirect("session_error.html");
 		}else {
-			User user = (User)httpSession.getAttribute("User");
-			PrintWriter out = response.getWriter();
+			User user=(User)session.getAttribute("user");
+			PrintWriter out=response.getWriter();
 			out.print("<!DOCTYPE html>");
 			out.print("<html>");
 			out.print("<body>");
-			out.print("<h1>Tausif Book App</h1>");
+			out.print("<h1>Incapp Book App</h1>");
 			out.print("<hr>");
 			out.print("Welcome: <b> "+user.getName()+" </b>");
 			out.print("&nbsp;&nbsp;<a href='UserHome'>Home</a>");
@@ -53,28 +53,28 @@ public class BookDetails extends HttpServlet {
 			out.print("&nbsp;&nbsp;<a href='Logout'>Logout</a>");
 			out.print("<hr>");
 			String name = request.getParameter("name");
-			Session session = HbUtility.sessionFactory.openSession();
-			Transaction transaction = session.beginTransaction();
-			Book book = session.get(Book.class, name);
-			if(book == null) {
-				out.print("<p>No Book Found</p>");
+			Session ses=HbUtility.sessionFactory.openSession();
+			Transaction transaction=ses.beginTransaction();
+			Book b=ses.get(Book.class, name);
+			if(b==null) {
+				out.print("<p>No Book Found!</p>");
 			}else {
 				out.print("<div style='background-color:yellow; padding:15px; margin:10px; width:250px'>");
-				if(book.getImage()!=null) {
-					out.print("<img src='GetImage?name="+book.getName()+"' height='100px' />");
+				if(b.getImage()!=null) {
+					out.print("<img src='GetImage?name="+b.getName()+"' height='100px' />");
 				}else {
-					out.print("<img src='book.png' height='100px' />");
+					out.print("<img src='book.jpg' height='100px' />");
 				}
-				out.print("<p>Name: "+book.getName()+" </p>");
-				out.print("<p>Author Name: "+book.getAname()+" </p>");
-				out.print("<p>Publisher Name: "+book.getPname()+" </p>");
-				out.print("<p>Price: "+book.getPrice()+" </p>");
-				if(book.getContent()!=null) {
-					out.print("<a href='DownloadPdf?name="+book.getName()+"'>Download Book</a>");
-					out.print("&nbsp;&nbsp;&nbsp;&nbsp;<a href='ViewPdf?name="+book.getName()+"' target='_blank'>View Book</a>");
+				out.print("<p>Name: "+b.getName()+" </p>");
+				out.print("<p>Author Name: "+b.getAname()+" </p>");
+				out.print("<p>Publisher Name: "+b.getPname()+" </p>");
+				out.print("<p>Price: "+b.getPrice()+" </p>");
+				if(b.getContent()!=null) {
+					out.print("<a href='DownloadPdf?name="+b.getName()+"'>Download Book</a>");
+					out.print("&nbsp;&nbsp;&nbsp;&nbsp;<a href='ViewPdf?name="+b.getName()+"' target='_blank'>View Book</a>");
 				}
 				out.print("<hr/>");
-				out.print("<a href='DeleteBook?name="+book.getName()+"'>Delete Book</a>");
+				out.print("<a href='DeleteBook?name="+b.getName()+"'>Delete Book</a>");
 				out.print("</div>");
 			}
 			out.print("</body>");
