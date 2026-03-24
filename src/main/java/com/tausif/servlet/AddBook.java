@@ -82,9 +82,9 @@ public class AddBook extends HttpServlet {
 					session.persist(b);
 					transaction.commit();
 					session.close();
-					response.sendRedirect("success.html");
+					httpSession.setAttribute("msg", "Book Added Successfully!");
 				} else {
-					response.sendRedirect("exist.html");
+					httpSession.setAttribute("msg", "Book Name Already Exists!");
 				}
 			}
 		}
