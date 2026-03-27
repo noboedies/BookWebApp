@@ -50,6 +50,7 @@ public class UserHome extends HttpServlet {
 			out.print("&nbsp;&nbsp;<a href='UserHome'>Home</a>");
 			out.print("&nbsp;&nbsp;<a href='AllBooks'>All Books</a>");
 			out.print("&nbsp;&nbsp;<a href='Logout'>Logout</a>");
+			out.print("&nbsp;&nbsp;<a href='DeleteUser?email="+user.getId()+"'>Delete User</a>");
 			out.print("<hr>");
 			String msg=(String)session.getAttribute("msg");
 			if(msg!=null) {
